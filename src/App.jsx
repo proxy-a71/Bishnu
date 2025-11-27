@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Send, Copy, Loader2 } from "lucide-react";
 
-const OPENAI_KEY = "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";
+const OPENAI_KEY = "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";
 
 export default function BishnuAI() {
   const [input, setInput] = useState("");
