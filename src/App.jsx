@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Send, Copy, Loader2 } from "lucide-react";
 
-const OPENAI_KEY = import.meta.env.VITE_OPENAI_KEY;
+const OPENAI_KEY = "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";
 
 export default function BishnuAI() {
   const [input, setInput] = useState("");
