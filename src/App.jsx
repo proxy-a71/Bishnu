@@ -223,7 +223,7 @@ const styles = {
     border: "2px solid #e0e0e0",
     outline: "none",
     fontSize: "16px",
-    background: "#f8f9fa"
+    background: "#f8f9fa",
     color: "black"
   },
   sendButton: {
