@@ -42,33 +42,14 @@ export default function BishnuAI() {
       return;
     }
 
-  async function sendMessage() {
-  if (!input.trim()) return;
-  const userMsg = { role: "user", text: input };
-  setMessages((m) => [...m, userMsg]);
-  const userInput = input;
-  setInput("");
-  setLoading(true);
-
-  // Special Response Bro
-  if (/who made you|who is your creator|who created you/i.test(userInput)) {
-    setMessages((m) => [
-      ...m,
-      { role: "assistant", text: "Zsateishiish aka Samarpan Aree made me - take's him 2 months to make me!!" },
-    ]);
-    setLoading(false);
-    return;
-  }
-
-  if (/who are you/i.test(userInput)) {
-    setMessages((m) => [
-      ...m,
-      { role: "assistant", text: "I am Bishnu Sir, your math teacher! I'm here to help you understand mathematical concepts, solve problems step-by-step, and provide explanations using LaTeX formatting for clarity. If you have any math-related questions or topics you'd like to explore, feel free to ask!" },
-    ]);
-    setLoading(false);
-    return;
-  }
-}
+    if (/who are you/i.test(userInput)) {
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", text: "I am Bishnu Sir, your math teacher! I'm here to help you understand mathematical concepts, solve problems step-by-step, and provide explanations using LaTeX formatting for clarity. If you have any math-related questions or topics you'd like to explore, feel free to ask!" },
+      ]);
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch("https://api.openai.com/v1/chat/completions", {
