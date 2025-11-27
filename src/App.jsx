@@ -34,7 +34,7 @@ export default function BishnuAI() {
     setInput("");
     setLoading(true);
 
-    if (/who made you/i.test(userInput)) {
+    if (/who made you|who is your creator|who created you/i.test(userInput)) {
       setMessages((m) => [
         ...m,
         { role: "assistant", text: "Zsateishiish aka Samarpan Aree made me - take's him 2 months to make me!!" },
@@ -93,9 +93,7 @@ export default function BishnuAI() {
         Bishnu AI
       </motion.h1>
 
-      {/* Replaced Card with div */}
       <div className="w-full max-w-2xl h-[80vh] bg-neutral-900 border border-neutral-800 flex flex-col rounded-2xl">
-        {/* Replaced CardContent with div */}
         <div className="flex-1 overflow-auto p-4 space-y-4">
           {messages.map((msg, i) => (
             <motion.div
@@ -137,7 +135,6 @@ export default function BishnuAI() {
             placeholder="Ask Bishnu AI..."
             className="flex-1 p-3 rounded-xl bg-neutral-800 border border-neutral-700 outline-none text-white placeholder-gray-400"
           />
-          {/* Replaced Button with button */}
           <button 
             onClick={sendMessage} 
             className="rounded-xl px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600"
