@@ -83,32 +83,137 @@ export default function BishnuAI() {
     return () => inputEl.removeEventListener('focus', handleFocus);
   }, []);
 
+  const styles = {
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      height: "100vh",
+      background: "#0a0a0a",
+      color: "white",
+      fontFamily: "sans-serif",
+      alignItems: "center",
+      padding: "20px"
+    },
+    title: {
+      fontSize: "2rem",
+      fontWeight: "bold",
+      marginBottom: "20px"
+    },
+    chatContainer: {
+      width: "100%",
+      maxWidth: "800px",
+      height: "70vh",
+      background: "#1a1a1a",
+      border: "1px solid #333",
+      borderRadius: "20px",
+      display: "flex",
+      flexDirection: "column",
+      overflow: "hidden"
+    },
+    messagesArea: {
+      flex: 1,
+      padding: "20px",
+      overflowY: "auto",
+      display: "flex",
+      flexDirection: "column",
+      gap: "15px"
+    },
+    userBubble: {
+      alignSelf: "flex-end",
+      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      color: "white",
+      padding: "15px",
+      borderRadius: "20px",
+      maxWidth: "80%",
+      wordWrap: "break-word",
+      boxShadow: "0 4px 15px rgba(0,0,0,0.3)"
+    },
+    aiBubble: {
+      alignSelf: "flex-start",
+      background: "white",
+      color: "black",
+      padding: "15px",
+      borderRadius: "20px",
+      maxWidth: "80%",
+      wordWrap: "break-word",
+      boxShadow: "0 4px 15px rgba(0,0,0,0.1)"
+    },
+    inputArea: {
+      display: "flex",
+      gap: "10px",
+      padding: "20px",
+      borderTop: "1px solid #333",
+      background: "#1a1a1a"
+    },
+    input: {
+      flex: 1,
+      padding: "15px",
+      borderRadius: "15px",
+      border: "1px solid #444",
+      outline: "none",
+      background: "#2a2a2a",
+      color: "white",
+      fontSize: "16px"
+    },
+    button: {
+      borderRadius: "15px",
+      border: "none",
+      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      color: "white",
+      fontWeight: "bold",
+      padding: "15px 20px",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      gap: "5px"
+    },
+    loading: {
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      color: "#ccc",
+      fontStyle: "italic",
+      padding: "10px"
+    },
+    messageContent: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      gap: "10px"
+    },
+    copyButton: {
+      background: "none",
+      border: "none",
+      color: "inherit",
+      cursor: "pointer",
+      opacity: "0.7"
+    }
+  };
+
   return (
-    <div className="w-full h-screen bg-neutral-950 text-white flex flex-col items-center p-4">
+    <div style={styles.container}>
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold mb-4"
+        style={styles.title}
       >
         Bishnu AI
       </motion.h1>
 
-      <div className="w-full max-w-2xl h-[80vh] bg-neutral-900 border border-neutral-800 flex flex-col rounded-2xl">
-        <div className="flex-1 overflow-auto p-4 space-y-4">
+      <div style={styles.chatContainer}>
+        <div style={styles.messagesArea}>
           {messages.map((msg, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`p-3 rounded-2xl max-w-[90%] whitespace-pre-wrap shadow-lg ${
-                msg.role === "user" ? "bg-violet-600 ml-auto" : "bg-white text-black"
-              }`}
+              style={msg.role === "user" ? styles.userBubble : styles.aiBubble}
             >
-              <div className="flex justify-between items-start gap-2">
+              <div style={styles.messageContent}>
                 <span dangerouslySetInnerHTML={{ __html: msg.text }} />
                 <button
                   onClick={() => navigator.clipboard.writeText(msg.text)}
-                  className="opacity-50 hover:opacity-100"
+                  style={styles.copyButton}
                 >
                   <Copy size={16} />
                 </button>
@@ -117,8 +222,8 @@ export default function BishnuAI() {
           ))}
 
           {loading && (
-            <div className="flex items-center gap-2 text-neutral-400 p-2">
-              <Loader2 className="animate-spin" />
+            <div style={styles.loading}>
+              <Loader2 size={18} style={{ animation: "spin 1s linear infinite" }} />
               Bishnu Sir is thinking...
             </div>
           )}
@@ -126,24 +231,31 @@ export default function BishnuAI() {
           <div ref={bottomRef} />
         </div>
 
-        <div className="p-3 flex gap-2 border-t border-neutral-800">
+        <div style={styles.inputArea}>
           <input
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             placeholder="Ask Bishnu AI..."
-            className="flex-1 p-3 rounded-xl bg-neutral-800 border border-neutral-700 outline-none text-white placeholder-gray-400"
+            style={styles.input}
           />
           <button 
             onClick={sendMessage} 
-            className="rounded-xl px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600"
+            style={styles.button}
             disabled={loading}
           >
             <Send size={18} />
           </button>
         </div>
       </div>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }
