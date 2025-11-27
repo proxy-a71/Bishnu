@@ -224,6 +224,7 @@ const styles = {
     outline: "none",
     fontSize: "16px",
     background: "#f8f9fa"
+    color: "black"
   },
   sendButton: {
     background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
