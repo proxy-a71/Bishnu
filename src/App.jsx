@@ -51,17 +51,12 @@ export default function BishnuAI() {
       return;
     }
 
-    if (/who is muskan/i.test(messageContent)) {
-      setTimeout(() => {
-        const muskanMessage = {
-          role: 'assistant',
-          content: "You mean Nyan Nyan, YUAN YUAN, If so Then My Creator Is Making A Translator For him!!"
-        };
-        const updatedMessages = [...newMessages, muskanMessage];
-        setMessages(updatedMessages);
-        updateChat(currentChatId, updatedMessages);
-        setIsLoading(false);
-      }, 1000);
+    if (/who is muskan/i.test(userInput)) {
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", text: "You mean Nyan Nyan, Yuan Yuan If so, My Creator Is Making Translator For Him!"},
+      ]);
+      setLoading(false);
       return;
     }
 
