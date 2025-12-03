@@ -51,6 +51,20 @@ export default function BishnuAI() {
       return;
     }
 
+    if (/who is muskan/i.test(messageContent)) {
+      setTimeout(() => {
+        const muskanMessage = {
+          role: 'assistant',
+          content: "You mean Nyan Nyan, YUAN YUAN, If so Then My Creator Is Making A Translator For him!!"
+        };
+        const updatedMessages = [...newMessages, muskanMessage];
+        setMessages(updatedMessages);
+        updateChat(currentChatId, updatedMessages);
+        setIsLoading(false);
+      }, 1000);
+      return;
+    }
+
     try {
       const res = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
